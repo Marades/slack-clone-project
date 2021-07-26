@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Req, Res, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { User } from 'src/common/decorator/user.decorator';
 import { UserDto } from 'src/common/dto/user.dto';
 import { UndefinedToNullInterceptor } from 'src/common/interceptors/undefinedToNull.intercepter';
@@ -32,7 +33,13 @@ export class UsersController {
         return;
     }
 
+    @ApiResponse({
+        status: 200,
+        description: '성공',
+        type: UserDto
+    })
     @ApiOperation({ summary: '로그인' })
+    @UseGuards(LocalAuthGuard) // 권한 체크, 로그인 했는지, 인터셉터보다 먼저 실행됨(401, 403 에러)
     @Post('login')
     logIn(@Req() req) {
         return req.user;
