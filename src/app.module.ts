@@ -10,9 +10,10 @@ import { WorkspacesModule } from './workspaces/workspaces.module';
 import { ChannelsModule } from './channels/channels.module';
 import { DmsModule } from './dms/dms.module';
 import * as ormconfig from '../ormconfig'
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UsersModule, WorkspacesModule, ChannelsModule, DmsModule, TypeOrmModule.forRoot(ormconfig)],
+  imports: [ConfigModule.forRoot(), AuthModule, UsersModule, WorkspacesModule, ChannelsModule, DmsModule, TypeOrmModule.forRoot(ormconfig)],
   controllers: [AppController],
   providers: [AppService],
 })

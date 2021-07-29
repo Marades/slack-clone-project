@@ -16,7 +16,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         if (!user) {
             throw new UnauthorizedException() //http exception 401 -> exception filter
         }
-
-        return done(null, user)
+        console.log('strategy')
+        return done(null, user) // -> LocalAuthGuard의 super.login
     }
 }

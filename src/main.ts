@@ -35,6 +35,8 @@ async function bootstrap() {
       }
     })
   )
+
+  // 넣어줘야 동작
   app.use(passport.initialize())
   app.use(passport.session())
 
